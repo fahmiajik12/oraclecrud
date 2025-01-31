@@ -67,7 +67,11 @@ if (isset($_GET['edit'])) {
   // jika data di temukan maka simpan ke dalam variable yang sudah ada.
   if ($data) {
     $nama = $data['NAMA'];
-    $deskripsi = $data['DESKRIPSI'];
+    if (is_object($data['DESKRIPSI'])) {
+        $deskripsi = $data['DESKRIPSI']->load(); // Load CLOB content
+    } else {
+        $deskripsi = $data['DESKRIPSI'];
+    }
     $title = 'Ubah';
   }
 }
